@@ -14,3 +14,10 @@ after_success:
   - docker build -t sreehan/multi-nginx ./nginx 
   - docker build -t sreehan/multi-server ./server
   - docker build -t sreehan/multi-worker ./worker 
+  # Log in to the docker CLI 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub 
+  - docker push sreehan/multi-client
+  - docker push sreehan/multi-nginx
+  - docker push sreehan/multi-server
+  - docker push sreehan/multi-worker
