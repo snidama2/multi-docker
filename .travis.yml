@@ -22,3 +22,15 @@ after_success:
   - docker push sreehan/multi-nginx
   - docker push sreehan/multi-server
   - docker push sreehan/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-dock'
+  env: 'MultiDock-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-043941359415'
+  bucket_path: 'docker-multi'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
