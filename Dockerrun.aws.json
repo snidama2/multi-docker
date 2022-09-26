@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client", 
+            "image": "sreehan/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server", 
+            "image": "sreehan/multi-server", 
+            "hostname": "api",
+            "essential": false
+        }, 
+        {
+            "name": "worker", 
+            "image": "sreehan/multi-worker", 
+            "hostname": "worker", 
+            "essential": false
+        }, 
+        {
+            "name": "nginx", 
+            "image": "sreehan/multi-nginx", 
+            "hostname": "nginx", 
+            "essential": true,  
+            "portMappings": [
+                {
+                    "hostPort": 80, 
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
